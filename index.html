@@ -95,9 +95,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="膨胀剂"><a href="#膨胀剂" class="headerlink" title="膨胀剂"></a>膨胀剂</h1><blockquote>
-<p>代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。</p>
-</blockquote>
+        <h1 id="膨胀剂"><a href="#膨胀剂" class="headerlink" title="膨胀剂"></a>膨胀剂</h1><p>代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。</p>
 <img src="/2020/02/17/bloaters/bloaters.png" class="" title="bloaters">
 
 <ul>
@@ -107,12 +105,10 @@
 <li><a href="#过长参数列">过长参数列</a></li>
 <li><a href="#数据泥团">数据泥团</a></li>
 </ul>
-<h2 id="过长方法"><a href="#过长方法" class="headerlink" title="过长方法"></a>过长方法</h2><blockquote>
-<ul>
+<h2 id="过长方法"><a href="#过长方法" class="headerlink" title="过长方法"></a>过长方法</h2><ul>
 <li>一个函数含有太多行代码。一般来说，任何函数超过 <strong>10</strong> 行时，你就可以考虑是不是过长了。 </li>
 <li>函数中的代码行数原则上不要超过 <strong>100</strong> 行。</li>
 </ul>
-</blockquote>
 <img src="/2020/02/17/bloaters/long-method-01.png" class="" title="long-method-01">
 
 <h3 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h3><p>通常情况下，创建一个新函数的难度要大于添加功能到一个已存在的函数。大部分人都觉得：“我就添加这么两行代码，为此新建一个函数实在是小题大做了。<br>”于是，张三加两行，李四加两行，王五加两行。。。函数日益庞大，最终烂的像一锅浆糊，再也没人能完全看懂了。<br>于是大家就更不敢轻易动这个函数了，只能恶性循环的往其中添加代码。所以，如果你看到一个超过 200 行的函数，通常都是多个程序员东拼西凑出来的。</p>
@@ -180,17 +176,13 @@
 <p>根据条件分支将整个条件表达式分解成几个函数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (notSummer(date)) &#123;</span><br><span class="line">  charge &#x3D; winterCharge(quantity);</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  charge &#x3D; summerCharge(quantity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<blockquote>
 <ul>
 <li>程序愈长就愈难理解</li>
 <li>函数过长阅读起来也不方便</li>
 <li>小函数的价值：解释能力、共享能力、选择能力</li>
 </ul>
-</blockquote>
 <p><strong>Tips：每当感觉需要以注释来说明点什么的时候，我们就把需要说明的东西写进一个独立的函数中。记着，起个好名字！</strong></p>
-<h2 id="过大的类"><a href="#过大的类" class="headerlink" title="过大的类"></a>过大的类</h2><blockquote>
-<p>一个类含有过多字段、函数、代码行。</p>
-</blockquote>
+<h2 id="过大的类"><a href="#过大的类" class="headerlink" title="过大的类"></a>过大的类</h2><p>一个类含有过多字段、函数、代码行。</p>
 
 
 <h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>类通常一开始很小，但是随着程序的增长而逐渐膨胀。</p>
@@ -243,20 +235,16 @@
 <img src="/2020/02/17/bloaters/duplicate-observed-data-after.png" class="" title="duplicate-observed-data-after">
 
 <p>如果想利用单一类做太多事情，其内往往就会出现太多的成员变量。</p>
-<blockquote>
 <ul>
 <li>提取完成同一任务的相关变量到一个新的类。</li>
 <li>干太多事情的类，可以考虑把责任委托给其他类。</li>
 </ul>
-</blockquote>
 <p><strong>Tips：一个类如果拥有太多的代码，也是代码重复、混乱、死亡的绝佳滋生地点。</strong></p>
-<h2 id="基本类型偏执"><a href="#基本类型偏执" class="headerlink" title="基本类型偏执"></a>基本类型偏执</h2><blockquote>
-<ul>
+<h2 id="基本类型偏执"><a href="#基本类型偏执" class="headerlink" title="基本类型偏执"></a>基本类型偏执</h2><ul>
 <li>使用基本类型而不是小对象来实现简单任务（例如货币、范围、电话号码字符串等）。</li>
 <li>使用常量编码信息（例如一个用于引用管理员权限的常量 USER_ADMIN_ROLE = 1 ）。</li>
 <li>使用字符串常量作为字段名在数组中使用。</li>
 </ul>
-</blockquote>
 <img src="/2020/02/17/bloaters/primitive-obsession-01.png" class="" title="primitive-obsession-01">
 
 <h2 id="问题原因-1"><a href="#问题原因-1" class="headerlink" title="问题原因"></a>问题原因</h2><p>类似其他大部分坏味道，基本类型偏执诞生于类初建的时候。一开始，可能只是不多的字段，随着表示的特性越来越多，基本数据类型字段也越来越多。</p>
@@ -327,9 +315,7 @@
 <p>以对象替换数组。对于数组中的每个元素，以一个字段来表示。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Performance row &#x3D; new Performance();</span><br><span class="line">row.setName(&quot;Liverpool&quot;);</span><br><span class="line">row.setWins(&quot;15&quot;);</span><br></pre></td></tr></table></figure>
 
-<h2 id="过长参数列"><a href="#过长参数列" class="headerlink" title="过长参数列"></a>过长参数列</h2><blockquote>
-<p>一个函数有超过 3、4 个入参。</p>
-</blockquote>
+<h2 id="过长参数列"><a href="#过长参数列" class="headerlink" title="过长参数列"></a>过长参数列</h2><p>一个函数有超过 3、4 个入参。</p>
 <img src="/2020/02/17/bloaters/long-parameter-list-01.png" class="" title="long-parameter-list-01">
 
 <h3 id="问题原因-2"><a href="#问题原因-2" class="headerlink" title="问题原因"></a>问题原因</h3><p>过长参数列可能是将多个算法并到一个函数中时发生的。函数中的入参可以用来控制最终选用哪个算法去执行。</p>
@@ -375,9 +361,7 @@
 
 <p>代码中有很多基本数据类型的数据。</p>
 <p>Tips:<strong>如果看到一些基本类型数据，尝试定义一种新的数据类型，符合它当前所代表的对象类型。</strong></p>
-<h2 id="数据泥团"><a href="#数据泥团" class="headerlink" title="数据泥团"></a>数据泥团</h2><blockquote>
-<p>有时，代码的不同部分包含相同的变量组（例如用于连接到数据库的参数）。这些绑在一起出现的数据应该拥有自己的对象。</p>
-</blockquote>
+<h2 id="数据泥团"><a href="#数据泥团" class="headerlink" title="数据泥团"></a>数据泥团</h2><p>有时，代码的不同部分包含相同的变量组（例如用于连接到数据库的参数）。这些绑在一起出现的数据应该拥有自己的对象。</p>
 <img src="/2020/02/17/bloaters/data-clumps-01.png" class="" title="data-clumps-01">
 
 <h3 id="问题原因-3"><a href="#问题原因-3" class="headerlink" title="问题原因"></a>问题原因</h3><p>通常，数据泥团的出现时因为糟糕的编程结构或“复制-粘贴式编程”。</p>
@@ -426,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/bloaters/" data-id="ck6pz1tzu00001j2v5nrtb59p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/bloaters/" data-id="ck6q1m7jd00018s2v0me94x3s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/refactor/" rel="tag">refactor</a></li></ul>
@@ -565,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/16/android-automated-test-summary/" data-id="ck6pz1u0300011j2v44f3dppi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/16/android-automated-test-summary/" data-id="ck6q1m7j600008s2ve0afgz43" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
