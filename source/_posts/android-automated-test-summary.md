@@ -9,6 +9,7 @@ tags: test
 ## 测试金字塔
 
 ![测试金字塔，显示了应用的测试套件应包含的三类测试](https://developer.android.google.cn/images/training/testing/pyramid_2x.png "测试金字塔")
+
 沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：**小型测试占70%，中型测试占20%，大型测试占10%**。
 
 ## 单元测试（小型测试）
@@ -58,6 +59,7 @@ tags: test
        testImplementation "org.robolectric:robolectric:$robolectricVersion"
     }   
 ```
+
 如果单元测试依赖于资源，需要在module的build.gradle文件中启用`includeAndroidResources`选项。然后，单元测试可以访问编译版本的资源，从而使测试更快速且更准确地运行。
 
 ```
@@ -133,6 +135,7 @@ class RxJavaRule : TestWatcher() {
     }
 }
 ```
+
 `TestScheduler`中`triggerActions`的使用。
 
 ```
@@ -187,6 +190,7 @@ class FilmViewModelTest {
     }
 }
 ```
+
 `TestSubscriber`的使用。
 
 ```
@@ -358,6 +362,7 @@ class FilmDaoTest {
     fun closeDb() = database.close()
 }
 ```
+
 **总结**：
 
 - 基于目前流行的`MVP`、`MVVM`架构设计模式，`MVP`中`Model`层和`Presenter`层尽量不依赖`Android Framework`，`MVVM`中`Model`层和`ViewModel`层尽量不依赖`Android Framework`。
@@ -466,8 +471,7 @@ public class LocalServiceTest {
  }
 ```
 
-- `Android`没有为`BroadcastReceiver`提供单独的测试用例类。要验证 `BroadcastReceiver`是否正确响应，可以测试向其发送`Intent`对象的组件。或者，可以通过调用`ApplicationProvider.getApplicationContext()`来创建`BroadcastReceiver`的实例，然后调用要测试的`BroadcastReceiver`方法（通常，这是`onReceive()`方法）
-
+- `Android`没有为`BroadcastReceiver`提供单独的测试用例类。要验证 `BroadcastReceiver`是否正确响应，可以测试向其发送`Intent`对象的组件。或者，可以通过调用`ApplicationProvider.getApplicationContext()`来创建`BroadcastReceiver`的实例，然后调用要测试的`BroadcastReceiver`方法（通常是`onReceive()`方法）。
 
 ## 端到端测试（大型测试）
 
