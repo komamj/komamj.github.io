@@ -7,20 +7,20 @@
   
   <title>Android自动化测试总结 | komamj&#39;s 札记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android自动化测试总结测试金字塔 沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为，">
+  <meta name="description" content="Android自动化测试总结测试金字塔  沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android自动化测试总结">
 <meta property="og:url" content="http://yoursite.com/2020/02/16/android-automated-test-summary/index.html">
 <meta property="og:site_name" content="komamj&#39;s 札记">
-<meta property="og:description" content="Android自动化测试总结测试金字塔 沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为，">
+<meta property="og:description" content="Android自动化测试总结测试金字塔  沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://developer.android.google.cn/images/training/testing/pyramid_2x.png">
+<meta property="og:image" content="http://yoursite.com/2020/02/16/android-automated-test-summary/of-tests.png">
 <meta property="article:published_time" content="2020-02-16T13:28:12.000Z">
-<meta property="article:modified_time" content="2020-02-17T03:24:14.819Z">
+<meta property="article:modified_time" content="2020-02-17T03:50:47.786Z">
 <meta property="article:author" content="komamj">
 <meta property="article:tag" content="test">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://developer.android.google.cn/images/training/testing/pyramid_2x.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/16/android-automated-test-summary/of-tests.png">
   
     <link rel="alternate" href="/atom.xml" title="komamj&#39;s 札记" type="application/atom+xml">
   
@@ -95,7 +95,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Android自动化测试总结"><a href="#Android自动化测试总结" class="headerlink" title="Android自动化测试总结"></a>Android自动化测试总结</h1><h2 id="测试金字塔"><a href="#测试金字塔" class="headerlink" title="测试金字塔"></a>测试金字塔</h2><p><img src="https://developer.android.google.cn/images/training/testing/pyramid_2x.png" alt="测试金字塔，显示了应用的测试套件应包含的三类测试" title="测试金字塔"></p>
+        <h1 id="Android自动化测试总结"><a href="#Android自动化测试总结" class="headerlink" title="Android自动化测试总结"></a>Android自动化测试总结</h1><h2 id="测试金字塔"><a href="#测试金字塔" class="headerlink" title="测试金字塔"></a>测试金字塔</h2><img src="/2020/02/16/android-automated-test-summary/of-tests.png" class="" title="测试金字塔，显示了应用的测试套件应包含的三类测试">
+
 <p>沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：<strong>小型测试占70%，中型测试占20%，大型测试占10%</strong>。</p>
 <h2 id="单元测试（小型测试）"><a href="#单元测试（小型测试）" class="headerlink" title="单元测试（小型测试）"></a>单元测试（小型测试）</h2><p><strong>用于验证应用的行为，一次验证一个类。</strong></p>
 <p><strong>原则（<code>F.I.R.S.T</code>）</strong></p>
@@ -103,20 +104,20 @@
 <p>除此之外，测试代码应该具备最好的<strong>可读性</strong>和最少的<strong>维护代价</strong>，绝大多数情况下写测试应该就像用<strong>领域特定语言描述一个事实</strong>，甚至<strong>不用经过仔细地思考</strong>。</p>
 <h3 id="构建本地单元测试"><a href="#构建本地单元测试" class="headerlink" title="构建本地单元测试"></a>构建本地单元测试</h3><p><strong>当需要更快地运行测试而不需要与在真实设备上运行测试关联的保真度和置信度时，可以使用本地单元测试来验证应用的逻辑。</strong></p>
 <ul>
-<li><p>如果测试对<code>Android</code>框架有依赖性（特别是与框架建立复杂交互的测试），则最好使用 <code>Robolectric</code>添加框架依赖项。</p>
+<li>如果测试对<code>Android</code>框架有依赖性（特别是与框架建立复杂交互的测试），则最好使用 <code>Robolectric</code>添加框架依赖项。</li>
+</ul>
 <blockquote>
 <p>例：待测试的类同时依赖<code>Context</code>、<code>Intent</code>、<code>Bundle</code>、<code>Application</code>等<code>Android Framework</code>中的类时，此时我们可以引入<code>Robolectric</code>框架进行本地单元测试的编写。</p>
 </blockquote>
-</li>
-<li><p>如果测试对<code>Android</code>框架的依赖性极小，或者如果测试仅取决于我们自己应用的对象，则可以使用诸如<code>Mockito</code>之类的模拟框架添加模拟依赖项。(<a href="https://github.com/android/testing-samples/tree/master/unit/BasicUnitAndroidTest" target="_blank" rel="noopener">BasicUnitAndroidTest</a>)</p>
+<ul>
+<li>如果测试对<code>Android</code>框架的依赖性极小，或者如果测试仅取决于我们自己应用的对象，则可以使用诸如<code>Mockito</code>之类的模拟框架添加模拟依赖项。(<a href="https://github.com/android/testing-samples/tree/master/unit/BasicUnitAndroidTest" target="_blank" rel="noopener">BasicUnitAndroidTest</a>)</li>
+</ul>
 <blockquote>
 <p>例：待测试的类只依赖<code>java api</code>（最理想的情况）,此时对于待测试类所依赖的其他类我们就可以利用<code>Mockito</code>框架mock其依赖类，再进行当前类的单元测试编写。(<a href="https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/EmailValidatorTest.java" target="_blank" rel="noopener">EmailValidatorTest</a>)</p>
 </blockquote>
 <blockquote>
 <p>例：待测试的类除了依赖<code>java api</code>外仅依赖<code>Android Framework</code>中<code>Context</code>这个类,此时我们就可以利用<code>Mockito</code>框架<code>mock</code> <code>Context</code>类，再进行当前类的单元测试编写。(<a href="https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/SharedPreferencesHelperTest.java" target="_blank" rel="noopener">SharedPreferencesHelperTest</a>) </p>
 </blockquote>
-</li>
-</ul>
 <h4 id="设置测试环境"><a href="#设置测试环境" class="headerlink" title="设置测试环境"></a>设置测试环境</h4><p>在<code>Android Studio</code>项目中，本地单元测试的源文件存储在<code>module-name/src/test/java/</code>中。</p>
 <p>在模块的顶级<code>build.gradle</code>文件中，将以下库指定为依赖项：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    &#x2F;&#x2F; Required -- JUnit 4 framework</span><br><span class="line">    testImplementation &quot;junit:junit:$junitVersion&quot;</span><br><span class="line">    &#x2F;&#x2F; Optional -- Mockito framework</span><br><span class="line">    testImplementation &quot;org.mockito:mockito-core:$mockitoCoreVersion&quot;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Optional -- Robolectric environment</span><br><span class="line">   testImplementation &quot;androidx.test:core:$xcoreVersion&quot;</span><br><span class="line">   testImplementation &quot;androidx.test.ext:junit:$extJunitVersion&quot;</span><br><span class="line">   testImplementation &quot;org.robolectric:robolectric:$robolectricVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -199,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/16/android-automated-test-summary/" data-id="ck6pwvilt0000z12vcp7uaoag" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/16/android-automated-test-summary/" data-id="ck6py5vwr0000ce2vbnw214me" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
