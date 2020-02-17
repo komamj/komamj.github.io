@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>android automated test summary | komamj&#39;s 札记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android自动化测试测试金字塔沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为，一次验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android automated test summary">
+<meta property="og:url" content="http://yoursite.com/2020/02/16/android-automated-test-summary/index.html">
+<meta property="og:site_name" content="komamj&#39;s 札记">
+<meta property="og:description" content="Android自动化测试测试金字塔沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：小型测试占70%，中型测试占20%，大型测试占10%。 单元测试（小型测试）用于验证应用的行为，一次验">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://developer.android.google.cn/images/training/testing/pyramid_2x.png">
+<meta property="article:published_time" content="2020-02-16T13:28:12.000Z">
+<meta property="article:modified_time" content="2020-02-16T13:29:27.547Z">
+<meta property="article:author" content="komamj">
+<meta property="article:tag" content="test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://developer.android.google.cn/images/training/testing/pyramid_2x.png">
+  
+    <link rel="alternate" href="/atom.xml" title="komamj&#39;s 札记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">komamj&#39;s 札记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">komamj在mobile开发中的一些总结与记录</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-android-automated-test-summary" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/16/android-automated-test-summary/" class="article-date">
+  <time datetime="2020-02-16T13:28:12.000Z" itemprop="datePublished">2020-02-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      android automated test summary
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android自动化测试"><a href="#Android自动化测试" class="headerlink" title="Android自动化测试"></a>Android自动化测试</h1><h2 id="测试金字塔"><a href="#测试金字塔" class="headerlink" title="测试金字塔"></a>测试金字塔</h2><p><img src="https://developer.android.google.cn/images/training/testing/pyramid_2x.png" alt="测试金字塔，显示了应用的测试套件应包含的三类测试" title="测试金字塔"><br>沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：<strong>小型测试占70%，中型测试占20%，大型测试占10%</strong>。</p>
+<h2 id="单元测试（小型测试）"><a href="#单元测试（小型测试）" class="headerlink" title="单元测试（小型测试）"></a>单元测试（小型测试）</h2><p><strong>用于验证应用的行为，一次验证一个类。</strong></p>
+<p><strong>原则（<code>F.I.R.S.T</code>）</strong></p>
+<p><strong>F</strong>ast(快)，单元测试要运行的足够快，单个测试方法一般要立即（一秒之内）给出结果。<br><strong>I</strong>dependent(独立)，测试方法之间不要有依赖（先执行某个测试方法，再执行另一个测试方法才能通过）。<br><strong>R</strong>epeatable（重复），可以在本地或 CI 不同环境（机器上）上反复执行，不会出现不稳定的情况。<br><strong>S</strong>elf-Validating（自验证），单元测试必须包含足够多的断言进行自我验证。<br><strong>T</strong>imely（及时），理想情况下应测试先行，至少保证单元测试应该和实现代码一起及时完成并提交。</p>
+<p>除此之外，测试代码应该具备最好的<strong>可读性</strong>和最少的<strong>维护代价</strong>，绝大多数情况下写测试应该就像用<strong>领域特定语言描述一个事实</strong>，甚至<strong>不用经过仔细地思考</strong>。</p>
+<h3 id="构建本地单元测试"><a href="#构建本地单元测试" class="headerlink" title="构建本地单元测试"></a>构建本地单元测试</h3><p><strong>当需要更快地运行测试而不需要与在真实设备上运行测试关联的保真度和置信度时，可以使用本地单元测试来验证应用的逻辑。</strong></p>
+<ul>
+<li><p>如果测试对<code>Android</code>框架有依赖性（特别是与框架建立复杂交互的测试），则最好使用 <code>Robolectric</code>添加框架依赖项。</p>
+<blockquote>
+<p>例：待测试的类同时依赖<code>Context</code>、<code>Intent</code>、<code>Bundle</code>、<code>Application</code>等<code>Android Framework</code>中的类时，此时我们可以引入<code>Robolectric</code>框架进行本地单元测试的编写。</p>
+</blockquote>
+</li>
+<li><p>如果测试对<code>Android</code>框架的依赖性极小，或者如果测试仅取决于我们自己应用的对象，则可以使用诸如<code>Mockito</code>之类的模拟框架添加模拟依赖项。(<a href="https://github.com/android/testing-samples/tree/master/unit/BasicUnitAndroidTest" target="_blank" rel="noopener">BasicUnitAndroidTest</a>)</p>
+<blockquote>
+<p>例：待测试的类只依赖<code>java api</code>（最理想的情况）,此时对于待测试类所依赖的其他类我们就可以利用<code>Mockito</code>框架mock其依赖类，再进行当前类的单元测试编写。(<a href="https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/EmailValidatorTest.java" target="_blank" rel="noopener">EmailValidatorTest</a>)</p>
+</blockquote>
+<blockquote>
+<p>例：待测试的类除了依赖<code>java api</code>外仅依赖<code>Android Framework</code>中<code>Context</code>这个类,此时我们就可以利用<code>Mockito</code>框架<code>mock</code> <code>Context</code>类，再进行当前类的单元测试编写。(<a href="https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/SharedPreferencesHelperTest.java" target="_blank" rel="noopener">SharedPreferencesHelperTest</a>) </p>
+</blockquote>
+</li>
+</ul>
+<h4 id="设置测试环境"><a href="#设置测试环境" class="headerlink" title="设置测试环境"></a>设置测试环境</h4><p>在<code>Android Studio</code>项目中，本地单元测试的源文件存储在<code>module-name/src/test/java/</code>中。</p>
+<p>在模块的顶级<code>build.gradle</code>文件中，将以下库指定为依赖项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    &#x2F;&#x2F; Required -- JUnit 4 framework</span><br><span class="line">    testImplementation &quot;junit:junit:$junitVersion&quot;</span><br><span class="line">    &#x2F;&#x2F; Optional -- Mockito framework</span><br><span class="line">    testImplementation &quot;org.mockito:mockito-core:$mockitoCoreVersion&quot;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Optional -- Robolectric environment</span><br><span class="line">   testImplementation &quot;androidx.test:core:$xcoreVersion&quot;</span><br><span class="line">   testImplementation &quot;androidx.test.ext:junit:$extJunitVersion&quot;</span><br><span class="line">   testImplementation &quot;org.robolectric:robolectric:$robolectricVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果单元测试依赖于资源，需要在module的build.gradle文件中启用<code>includeAndroidResources</code>选项。然后，单元测试可以访问编译版本的资源，从而使测试更快速且更准确地运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    &#x2F;&#x2F; ...</span><br><span class="line"></span><br><span class="line">    testOptions &#123;</span><br><span class="line">        unitTests &#123;</span><br><span class="line">            includeAndroidResources &#x3D; true</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(AndroidJUnit4::class)</span><br><span class="line">@Config(manifest &#x3D; Config.NONE)</span><br><span class="line">class PeopleDaoTest &#123;</span><br><span class="line">    private lateinit var database: PeopleDatabase</span><br><span class="line"></span><br><span class="line">    private lateinit var peopleDao: PeopleDao</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    fun &#96;create db&#96;() &#123;</span><br><span class="line">        database &#x3D; Room.inMemoryDatabaseBuilder(</span><br><span class="line">            ApplicationProvider.getApplicationContext(),</span><br><span class="line">            PeopleDatabase::class.java</span><br><span class="line">        ).allowMainThreadQueries().build()</span><br><span class="line"></span><br><span class="line">        peopleDao &#x3D; database.peopleDao()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun &#96;should return empty list when getPeople without inserted data&#96;() &#123;</span><br><span class="line">        val result &#x3D; peopleDao.getPeople(pageId &#x3D; 1)</span><br><span class="line"></span><br><span class="line">        assertThat(result).isNotNull()</span><br><span class="line">        assertThat(result).isEmpty()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果单元测试包含异步操作时，可以使用<a href="https://github.com/awaitility/awaitility" target="_blank" rel="noopener">awaitility库</a>进行测试；当使用<a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="noopener">RxJava</a>响应式编程库时，可以自定义rule：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class RxJavaRule : TestWatcher() &#123;</span><br><span class="line">    override fun starting(description: Description?) &#123;</span><br><span class="line">        super.starting(description)</span><br><span class="line"></span><br><span class="line">        RxJavaPlugins.setIoSchedulerHandler &#123;</span><br><span class="line">            Schedulers.trampoline()</span><br><span class="line">        &#125;</span><br><span class="line">        RxJavaPlugins.setNewThreadSchedulerHandler &#123;</span><br><span class="line">            Schedulers.trampoline()</span><br><span class="line">        &#125;</span><br><span class="line">        RxJavaPlugins.setComputationSchedulerHandler &#123;</span><br><span class="line">            Schedulers.trampoline()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        RxAndroidPlugins.setMainThreadSchedulerHandler &#123;</span><br><span class="line">            Schedulers.trampoline()</span><br><span class="line">        &#125;</span><br><span class="line">        RxAndroidPlugins.setInitMainThreadSchedulerHandler &#123;</span><br><span class="line">            Schedulers.trampoline()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    override fun finished(description: Description?) &#123;</span><br><span class="line">        super.finished(description)</span><br><span class="line"></span><br><span class="line">        RxJavaPlugins.reset()</span><br><span class="line"></span><br><span class="line">        RxAndroidPlugins.reset()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>TestScheduler</code>中<code>triggerActions</code>的使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(JUnit4::class)</span><br><span class="line">class FilmViewModelTest &#123;</span><br><span class="line">    @get:Rule</span><br><span class="line">    val instantTaskExecutorRule &#x3D; InstantTaskExecutorRule()</span><br><span class="line">    @get:Rule</span><br><span class="line">    val rxJavaRule &#x3D; RxJavaRule()</span><br><span class="line"></span><br><span class="line">    private val repository &#x3D; mock(Repository::class.java)</span><br><span class="line"></span><br><span class="line">    private val testScheduler &#x3D; TestScheduler()</span><br><span class="line"></span><br><span class="line">    private lateinit var viewModel: FilmViewModel</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    fun init() &#123;</span><br><span class="line">        viewModel &#x3D; FilmViewModel(repository)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun &#96;should return true when loadFilms is loading&#96;() &#123;</span><br><span class="line">        &#96;when&#96;(repository.getPopularFilms(1)).thenReturn(</span><br><span class="line">            Single.just(emptyList&lt;Film&gt;())</span><br><span class="line">                .subscribeOn(testScheduler)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        viewModel.loadFilms(0)</span><br><span class="line"></span><br><span class="line">        assertThat(getValue(viewModel.isLoading)).isTrue()</span><br><span class="line">        testScheduler.triggerActions()</span><br><span class="line">        assertThat(getValue(viewModel.isLoading)).isFalse()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun &#96;should return films list when loadFilms successful&#96;() &#123;</span><br><span class="line">        &#96;when&#96;(repository.getPopularFilms(1)).thenReturn(</span><br><span class="line">            Single.just(</span><br><span class="line">                listOf(</span><br><span class="line">                    Film(123, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">                )</span><br><span class="line">            ).subscribeOn(testScheduler)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        viewModel.loadFilms(0)</span><br><span class="line"></span><br><span class="line">        assertThat(getValue(viewModel.films)).isNull()</span><br><span class="line">        testScheduler.triggerActions()</span><br><span class="line">        assertThat(getValue(viewModel.films)).isNotNull()</span><br><span class="line">        assertThat(getValue(viewModel.films).size).isEqualTo(1)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>TestSubscriber</code>的使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(JUnit4::class)</span><br><span class="line">class WebServiceTest &#123;</span><br><span class="line">    private lateinit var webService: WebService</span><br><span class="line"></span><br><span class="line">    private lateinit var mockWebServer: MockWebServer</span><br><span class="line"></span><br><span class="line">    @get:Rule</span><br><span class="line">    val instantExecutorRule &#x3D; InstantTaskExecutorRule()</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    fun &#96;start service&#96;() &#123;</span><br><span class="line">        mockWebServer &#x3D; MockWebServer()</span><br><span class="line"></span><br><span class="line">        webService &#x3D; Retrofit.Builder()</span><br><span class="line">            .baseUrl(mockWebServer.url(&quot;&#x2F;&quot;))</span><br><span class="line">            .addConverterFactory(GsonConverterFactory.create())</span><br><span class="line">            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())</span><br><span class="line">            .build()</span><br><span class="line">            .create(WebService::class.java)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun &#96;should return fim list when getFilms successful&#96;() &#123;</span><br><span class="line">        assertThat(webService).isNotNull()</span><br><span class="line"></span><br><span class="line">        enqueueResponse(&quot;popular_films.json&quot;)</span><br><span class="line"></span><br><span class="line">        val testObserver &#x3D; webService.getPopularFilms(page &#x3D; 1)</span><br><span class="line">            .map &#123;</span><br><span class="line">                it.data</span><br><span class="line">            &#125;.test()</span><br><span class="line"></span><br><span class="line">        testObserver.assertNoErrors()</span><br><span class="line">        testObserver.assertValueCount(1)</span><br><span class="line">        testObserver.assertValue &#123;</span><br><span class="line">            assertThat(it).isNotEmpty()</span><br><span class="line">            assertThat(it[0].id).isEqualTo(297761)</span><br><span class="line">            assertThat(it[1].id).isEqualTo(324668)</span><br><span class="line">            it.size &#x3D;&#x3D; 2</span><br><span class="line">        &#125;</span><br><span class="line">        testObserver.assertComplete()</span><br><span class="line">        testObserver.dispose()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @After</span><br><span class="line">    fun &#96;stop service&#96;() &#123;</span><br><span class="line">        mockWebServer.shutdown()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private fun enqueueResponse(fileName: String) &#123;</span><br><span class="line">        val inputStream &#x3D; javaClass.classLoader?.getResourceAsStream(&quot;api-response&#x2F;$fileName&quot;)</span><br><span class="line">            ?: return</span><br><span class="line">        val source &#x3D; inputStream.source().buffer()</span><br><span class="line">        val mockResponse &#x3D; MockResponse()</span><br><span class="line">        mockWebServer.enqueue(</span><br><span class="line">            mockResponse</span><br><span class="line">                .setBody(source.readString(Charsets.UTF_8))</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="构建插桩单元测试"><a href="#构建插桩单元测试" class="headerlink" title="构建插桩单元测试"></a>构建插桩单元测试</h3><p><strong>插桩单元测试是在物理设备和模拟器上运行的测试，此类测试可以利用<code>Android</code>框架<code>API</code>。插桩测试提供的保真度比本地单元测试要高，但运行速度要慢得多。因此，我们建议只有在必须针对真实设备的行为进行测试时才使用插桩单元测试。</strong></p>
+<h4 id="设置测试环境-1"><a href="#设置测试环境-1" class="headerlink" title="设置测试环境"></a>设置测试环境</h4><p>在<code>Android Studio</code>项目中，插桩测试的源文件存储在<code>module-name/src/androidTest/java/</code>。</p>
+<p>在模块的顶级<code>build.gradle</code>文件中，将以下库指定为依赖项：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        testInstrumentationRunner &quot;androidx.test.runner.AndroidJUnitRunner&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    androidTestImplementation &quot;androidx.test.ext:junit:$extJunitVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;androidx.test:core:$xcoreVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;androidx.test:rules:$rulesVersion&quot;</span><br><span class="line">    &#x2F;&#x2F; Optional -- Truth library</span><br><span class="line">    androidTestImplementation &quot;androidx.test.ext:truth:$androidxtruthVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;org.mockito:mockito-core:$mockitoCoreVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;org.mockito:mockito-android:$mockitoAndroidVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(AndroidJUnit4::class)</span><br><span class="line">@SmallTest</span><br><span class="line">class FilmDaoTest &#123;</span><br><span class="line">    @get:Rule</span><br><span class="line">    var instantTaskExecutorRule &#x3D; InstantTaskExecutorRule()</span><br><span class="line"></span><br><span class="line">    private lateinit var database: FilmDatabase</span><br><span class="line"></span><br><span class="line">    private lateinit var filmDao: FilmDao</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    fun initDb() &#123;</span><br><span class="line">        database &#x3D; Room.inMemoryDatabaseBuilder(</span><br><span class="line">            ApplicationProvider.getApplicationContext(),</span><br><span class="line">            FilmDatabase::class.java</span><br><span class="line">        ).build()</span><br><span class="line"></span><br><span class="line">        filmDao &#x3D; database.filmData()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun should_return_film_list_when_getFilms_with_inserted_film_list() &#123;</span><br><span class="line">        filmDao.insert(</span><br><span class="line">            Film(100, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">        )</span><br><span class="line">        filmDao.insert(</span><br><span class="line">            Film(101, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        val result &#x3D; filmDao.getFilms(1)</span><br><span class="line"></span><br><span class="line">        assertThat(result).isNotNull()</span><br><span class="line">        assertThat(result).isNotEmpty()</span><br><span class="line">        assertThat(result.size).isEqualTo(2)</span><br><span class="line">        assertThat(result[0].id).isEqualTo(100)</span><br><span class="line">        assertThat(result[0].page).isEqualTo(1)</span><br><span class="line">        assertThat(result[1].id).isEqualTo(101)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun should_return_film_list_with_size_1_when_getFilms_with_inserted_2_same_film() &#123;</span><br><span class="line">        filmDao.insert(</span><br><span class="line">            Film(100, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">        )</span><br><span class="line">        filmDao.insert(</span><br><span class="line">            Film(100, &quot;1223&quot;, &quot;111&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        val result &#x3D; filmDao.getFilms(1)</span><br><span class="line"></span><br><span class="line">        assertThat(result).isNotNull()</span><br><span class="line">        assertThat(result).isNotEmpty()</span><br><span class="line">        assertThat(result.size).isEqualTo(1)</span><br><span class="line">        assertThat(result[0].id).isEqualTo(100)</span><br><span class="line">        assertThat(result[0].page).isEqualTo(1)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    fun should_return_empty_list_when_getFilms_with_deleteAll_called() &#123;</span><br><span class="line">        filmDao.insert(</span><br><span class="line">            Film(100, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 1)</span><br><span class="line">        )</span><br><span class="line">        filmDao.deleteAll()</span><br><span class="line"></span><br><span class="line">        val newResult &#x3D; filmDao.getFilms(1)</span><br><span class="line"></span><br><span class="line">        assertThat(newResult).isNotNull()</span><br><span class="line">        assertThat(newResult).isEmpty()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @After</span><br><span class="line">    fun closeDb() &#x3D; database.close()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><p>基于目前流行的<code>MVP</code>、<code>MVVM</code>架构设计模式，<code>MVP</code>中<code>Model</code>层和<code>Presenter</code>层尽量不依赖<code>Android Framework</code>，<code>MVVM</code>中<code>Model</code>层和<code>ViewModel</code>层尽量不依赖<code>Android Framework</code>。</p>
+</li>
+<li><p>类的设计做到单一职责原则,依赖其他类时提供方便mock的方式（例如作为构造方法参数传递），某一个方法依赖其他对象时，小重构该对象作为方法参数传入。</p>
+</li>
+<li><p>方法尽量短小（方法太长时可以利用重构手法在方法中再提取方法）。</p>
+</li>
+<li><p>只覆盖public方法单元测试，privite方法可以间接测试。</p>
+</li>
+<li><p>当依赖<code>Android Framework API</code>非常少时，可以采用<code>Mock Android api</code>的方式。</p>
+</li>
+<li><p>当严重依赖<code>Android Framework API</code>时，引入<code>Robolectric</code>库模拟<code>Android</code>环境或者放入AndroidTest目录作为插桩单元测试在物理设备上跑。</p>
+</li>
+<li><p>使用<code>Robolectric</code>库写本地单元测试时，依赖的某些类的方法调用出问题导致测试<code>failed</code>时，可以使用<code>shadow</code>类提供默认实现。</p>
+</li>
+<li><p>每条测试采用<code>Given</code>、<code>When</code>、<code>Then</code>的方式进行区分.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void should_do_something_if_some_condition_fulfills() &#123;</span><br><span class="line">    &#x2F;&#x2F; Given 设置前置条件</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; When 执行被测方法</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Then 验证方法结果</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="集成测试（中型测试）"><a href="#集成测试（中型测试）" class="headerlink" title="集成测试（中型测试）"></a>集成测试（中型测试）</h2><p><strong>用于验证模块内堆栈级别之间的交互或相关模块之间的交互</strong></p>
+<ul>
+<li>如果应用使用了用户不直接与之交互的组件（如<code>Service</code>或<code>ContentProvider</code>），应验证这些组件在应用中的行为是否正确。</li>
+</ul>
+<h3 id="设置测试环境-2"><a href="#设置测试环境-2" class="headerlink" title="设置测试环境"></a>设置测试环境</h3><p><strong>参考插桩单元测试环境设置</strong></p>
+<h4 id="Service测试"><a href="#Service测试" class="headerlink" title="Service测试"></a>Service测试</h4><ul>
+<li><strong>利用<code>ServiceTestRule</code>，可在单元测试方法运行之前启动服务，并在测试完成后关闭服务。</strong></li>
+<li><strong><code>ServiceTestRule</code>类不支持测试<code>IntentService</code>对象。如果需要测试<code>IntentService</code>对象，可以应将逻辑封装在一个单独的类中，并创建相应的单元测试。</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@MediumTest</span><br><span class="line">@RunWith(AndroidJUnit4.class)</span><br><span class="line">public class LocalServiceTest &#123;</span><br><span class="line">    @Rule</span><br><span class="line">    public final ServiceTestRule mServiceRule &#x3D; new ServiceTestRule();</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void testWithBoundService() throws TimeoutException &#123;</span><br><span class="line">        &#x2F;&#x2F; Create the service Intent.</span><br><span class="line">        Intent serviceIntent &#x3D;</span><br><span class="line">                new Intent(getApplicationContext(), LocalService.class);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Data can be passed to the service via the Intent.</span><br><span class="line">        serviceIntent.putExtra(LocalService.SEED_KEY, 42L);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Bind the service and grab a reference to the binder.</span><br><span class="line">        IBinder binder &#x3D; mServiceRule.bindService(serviceIntent);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Get the reference to the service, or you can call public methods on the binder directly.</span><br><span class="line">        LocalService service &#x3D; ((LocalService.LocalBinder) binder).getService();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Verify that the service is working correctly.</span><br><span class="line">        assertThat(service.getRandomInt(), is(any(Integer.class)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ContentProvider的测试"><a href="#ContentProvider的测试" class="headerlink" title="ContentProvider的测试"></a>ContentProvider的测试</h4><p><strong>使用<code>ProviderTestRule</code></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Rule</span><br><span class="line">public ProviderTestRule mProviderRule &#x3D;</span><br><span class="line">    new ProviderTestRule.Builder(MyContentProvider.class, MyContentProvider.AUTHORITY).build();</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void verifyContentProviderContractWorks() &#123;</span><br><span class="line">    ContentResolver resolver &#x3D; mProviderRule.getResolver();</span><br><span class="line">    &#x2F;&#x2F; perform some database (or other) operations</span><br><span class="line">    Uri uri &#x3D; resolver.insert(testUrl, testContentValues);</span><br><span class="line">    &#x2F;&#x2F; perform some assertions on the resulting URI</span><br><span class="line">    assertNotNull(uri);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Rule</span><br><span class="line">public ProviderTestRule mProviderRule &#x3D;</span><br><span class="line">    new ProviderTestRule.Builder(MyContentProvider.class, MyContentProvider.AUTHORITY)</span><br><span class="line">        .setDatabaseCommands(DATABASE_NAME, INSERT_ONE_ENTRY_CMD, INSERT_ANOTHER_ENTRY_CMD)</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void verifyTwoEntriesInserted() &#123;</span><br><span class="line">    ContentResolver mResolver &#x3D; mProviderRule.getResolver();</span><br><span class="line">    &#x2F;&#x2F; two entries are already inserted by rule, we can directly perform assertions to verify</span><br><span class="line">    Cursor c &#x3D; null;</span><br><span class="line">    try &#123;</span><br><span class="line">      c &#x3D; mResolver.query(URI_TO_QUERY_ALL, null, null, null, null);</span><br><span class="line">      assertNotNull(c);</span><br><span class="line">      assertEquals(2, c.getCount());</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      if (c !&#x3D; null &amp;&amp; !c.isClosed()) &#123;</span><br><span class="line">        c.close();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Android</code>没有为<code>BroadcastReceiver</code>提供单独的测试用例类。要验证 <code>BroadcastReceiver</code>是否正确响应，可以测试向其发送<code>Intent</code>对象的组件。或者，可以通过调用<code>ApplicationProvider.getApplicationContext()</code>来创建<code>BroadcastReceiver</code>的实例，然后调用要测试的<code>BroadcastReceiver</code>方法（通常，这是<code>onReceive()</code>方法）</li>
+</ul>
+<h2 id="端到端测试（大型测试）"><a href="#端到端测试（大型测试）" class="headerlink" title="端到端测试（大型测试）"></a>端到端测试（大型测试）</h2><p><strong>用于验证跨越了应用的多个模块的用户操作流程</strong></p>
+<p><strong>界面测试的一种方法是直接让测试人员对目标应用执行一系列用户操作，并验证其行为是否正常。不过，这种人工方法会非常耗时、繁琐且容易出错。一种更高效的方法是编写界面测试，以便以自动化方式执行用户操作。自动化方法可以以可重复的方式快速可靠地运行测试。</strong></p>
+<h3 id="设置测试环境-3"><a href="#设置测试环境-3" class="headerlink" title="设置测试环境"></a>设置测试环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    androidTestImplementation &quot;androidx.test.ext:junit:$extJunitVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;androidx.test:core:$xcoreVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;androidx.test:rules:$rulesVersion&quot;</span><br><span class="line">    &#x2F;&#x2F; Optional -- Truth library</span><br><span class="line">    androidTestImplementation &quot;androidx.test.ext:truth:$androidxtruthVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;org.mockito:mockito-core:$mockitoCoreVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;org.mockito:mockito-android:$mockitoAndroidVersion&quot;</span><br><span class="line">     &#x2F;&#x2F; Optional -- UI testing with Espresso</span><br><span class="line">    androidTestImplementation &quot;androidx.test.espresso:espresso-core:$espressoVersion&quot;</span><br><span class="line">    androidTestImplementation &quot;androidx.test.espresso:espresso-intents:$espressoVersion&quot;</span><br><span class="line">    &#x2F;&#x2F; Optional -- UI testing with UI Automator</span><br><span class="line">    androidTestImplementation &quot;androidx.test.uiautomator:uiautomator:$uiautomatorVersion&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>涵盖单个应用的界面测试</strong>：这种类型的测试可验证目标应用在用户执行特定操作或在其 <code>Activity</code> 中输入特定内容时的行为是否符合预期。它可让您检查目标应用是否返回正确的界面输出来响应应用 <code>Activity</code> 中的用户交互。诸如 <code>Espresso</code> 之类的界面测试框架可让您以编程方式模拟用户操作，并测试复杂的应用内用户交互。(<a href="https://github.com/android/testing-samples/tree/master/ui/espresso" target="_blank" rel="noopener">espresso测试单个应用的界面例子</a>)</p>
+</li>
+<li><p><strong>涵盖多个应用的界面测试</strong>：这种类型的测试可验证不同用户应用之间交互或用户应用与系统应用之间交互的正确行为。例如，您可能想要测试相机应用是否能够与第三方社交媒体应用或默认的 <code>Android</code> 相册应用正确分享图片。支持跨应用交互的界面测试框架（如 <code>UI Automator</code>）可让您针对此类场景创建测试。（<a href="https://github.com/android/testing-samples/tree/master/ui/uiautomator/BasicSample" target="_blank" rel="noopener">uiautomator测试多个应用的界面</a>）</p>
+</li>
+</ul>
+<p><a href="https://github.com/android/testing-samples" target="_blank" rel="noopener">参考例子testing-samples</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/16/android-automated-test-summary/" data-id="ck6ptj5040001a72vaw0ygrai" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/16/android-automated-test-summary/">android automated test summary</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/16/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 komamj<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
