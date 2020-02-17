@@ -100,4 +100,4 @@ theme: landscape
 deploy:
   type: git
   repo: https://github.com/komamj/komamj.github.io.git
-  branch: gh-pages
+  branch: master
