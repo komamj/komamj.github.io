@@ -8,7 +8,7 @@ tags: test
 
 ## 测试金字塔
 
-![测试金字塔，显示了应用的测试套件应包含的三类测试](https://developer.android.google.cn/images/training/testing/pyramid_2x.png "测试金字塔")
+{% asset_img of-tests.png 测试金字塔，显示了应用的测试套件应包含的三类测试 %}
 
 沿着金字塔逐级向上，从小型测试到大型测试，各类测试的保真度逐级提高，但维护和调试工作所需的执行时间和工作量也逐级增加。因此，您编写的单元测试应多于集成测试，集成测试应多于端到端测试。虽然各类测试的比例可能会因应用的用例不同而异，但我们通常建议各类测试所占比例如下：**小型测试占70%，中型测试占20%，大型测试占10%**。
 
@@ -32,13 +32,13 @@ tags: test
 
 - 如果测试对`Android`框架有依赖性（特别是与框架建立复杂交互的测试），则最好使用 `Robolectric`添加框架依赖项。
 
-	> 例：待测试的类同时依赖`Context`、`Intent`、`Bundle`、`Application`等`Android Framework`中的类时，此时我们可以引入`Robolectric`框架进行本地单元测试的编写。
+> 例：待测试的类同时依赖`Context`、`Intent`、`Bundle`、`Application`等`Android Framework`中的类时，此时我们可以引入`Robolectric`框架进行本地单元测试的编写。
 	
 - 如果测试对`Android`框架的依赖性极小，或者如果测试仅取决于我们自己应用的对象，则可以使用诸如`Mockito`之类的模拟框架添加模拟依赖项。([BasicUnitAndroidTest](https://github.com/android/testing-samples/tree/master/unit/BasicUnitAndroidTest))
 
-	> 例：待测试的类只依赖`java api`（最理想的情况）,此时对于待测试类所依赖的其他类我们就可以利用`Mockito`框架mock其依赖类，再进行当前类的单元测试编写。([EmailValidatorTest](https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/EmailValidatorTest.java))
+> 例：待测试的类只依赖`java api`（最理想的情况）,此时对于待测试类所依赖的其他类我们就可以利用`Mockito`框架mock其依赖类，再进行当前类的单元测试编写。([EmailValidatorTest](https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/EmailValidatorTest.java))
 	
-	> 例：待测试的类除了依赖`java api`外仅依赖`Android Framework`中`Context`这个类,此时我们就可以利用`Mockito`框架`mock` `Context`类，再进行当前类的单元测试编写。([SharedPreferencesHelperTest](https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/SharedPreferencesHelperTest.java)) 
+> 例：待测试的类除了依赖`java api`外仅依赖`Android Framework`中`Context`这个类,此时我们就可以利用`Mockito`框架`mock` `Context`类，再进行当前类的单元测试编写。([SharedPreferencesHelperTest](https://github.com/android/testing-samples/blob/master/unit/BasicSample/app/src/test/java/com/example/android/testing/unittesting/BasicSample/SharedPreferencesHelperTest.java)) 
 
 #### 设置测试环境
 

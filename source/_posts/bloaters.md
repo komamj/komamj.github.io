@@ -3,8 +3,6 @@ title: 代码坏味道之膨胀剂
 date: 2020-02-17 10:35:22
 tags: refactor
 ---
-# 代码坏味道之**膨胀剂**
-
 > 代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。
 
 {% asset_img bloaters.png bloaters %}
@@ -129,13 +127,13 @@ double basePrice() {
 
 某些参数总是很自然地同时出现。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-before.png"/></div>
+{% asset_img introduce-parameter-object-before.png introduce-parameter-object-before %}
 
 **解决**
 
 以一个对象来取代这些参数。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-after.png"/></div>
+{% asset_img introduce-parameter-object-after.png introduce-parameter-object-after %}
 
 #### 保持对象完整(Preserve Whole Object)
 
@@ -243,7 +241,7 @@ else {
 
 > 一个类含有过多字段、函数、代码行。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/large-class-01.png"/></div>
+{% asset_img large-class-01.png large-class-01 %}
 
 ### 问题原因
 
@@ -255,7 +253,7 @@ else {
 
 设计模式中有一条重要原则：职责单一原则。一个类应该只赋予它一个职责。如果它所承担的职责太多，就该考虑为它减减负。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/large-class-02.png"/></div>
+{% asset_img large-class-02.png large-class-02 %}
 
 - 如果过大类中的部分行为可以提炼到一个独立的组件中，可以使用 `提炼类(Extract Class)`。
 - 如果过大类中的部分行为可以用不同方式实现或使用于特殊场景，可以使用 `提炼子类(Extract Subclass)`。
@@ -267,7 +265,7 @@ else {
 - 重构过大的类可以使程序员不必记住一个类中大量的属性。
 - 在大多数情况下，分割过大的类可以避免代码和功能的重复。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/large-class-03.png"/></div>
+{% asset_img large-class-03.png large-class-03 %}
 
 ### 重构方法说明
 
@@ -277,13 +275,13 @@ else {
 
 某个类做了不止一件事。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-class-before.png"/></div>
+{% asset_img extract-class-before.png extract-class-before %}
 
 **解决**
 
 建立一个新类，将相关的字段和函数从旧类搬移到新类。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-class-after.png"/></div>
+{% asset_img extract-class-after.png extract-class-after %}
 
 #### 提炼子类(Extract Subclass)
 
@@ -291,13 +289,13 @@ else {
 
 一个类中有些特性仅用于特定场景。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-subclass-before.png"/></div>
+{% asset_img extract-subclass-before.png extract-subclass-before %}
 
 **解决**
 
 创建一个子类，并将用于特殊场景的特性置入其中。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-subclass-after.png"/></div>
+{% asset_img extract-subclass-after.png extract-subclass-after %}
 
 #### 提炼接口(Extract Interface)
 
@@ -305,13 +303,13 @@ else {
 
 多个客户端使用一个类部分相同的函数。另一个场景是两个类中的部分函数相同。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-interface-before.png"/></div>
+{% asset_img extract-interface-before.png extract-interface-before %}
 
 **解决**
 
 移动相同的部分函数到接口中。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-interface-after.png"/></div>
+{% asset_img extract-interface-after.png extract-interface-after %}
 
 #### 复制被监视数据(Duplicate Observed Data)
 
@@ -319,13 +317,13 @@ else {
 
 如果存储在类中的数据是负责 GUI 的。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/duplicate-observed-data-before.png"/></div>
+{% asset_img duplicate-observed-data-before.png duplicate-observed-data-before %}
 
 **解决**
 
 一个比较好的方法是将负责 GUI 的数据放入一个独立的类，以确保 GUI 数据与域类之间的连接和同步。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/duplicate-observed-data-after.png"/></div>
+{% asset_img duplicate-observed-data-after.png duplicate-observed-data-after %}
 
 如果想利用单一类做太多事情，其内往往就会出现太多的成员变量。
 
@@ -340,7 +338,7 @@ else {
 > - 使用常量编码信息（例如一个用于引用管理员权限的常量USER_ADMIN_ROLE = 1 ）。
 > - 使用字符串常量作为字段名在数组中使用。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/primitive-obsession-01.png"/></div>
+{% asset_img primitive-obsession-01.png primitive-obsession-01 %}
 
 ## 问题原因
 
@@ -352,7 +350,7 @@ else {
 
 ## 解决方案
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/primitive-obsession-02.png"/></div>
+{% asset_img primitive-obsession-02.png primitive-obsession-02 %}
 
 大多数编程语言都支持基本数据类型和结构类型（类、结构体等）。结构类型允许程序员将基本数据类型组织起来，以代表某一事物的模型。
 
@@ -369,7 +367,7 @@ else {
 - 代码变得更加易读和更加有组织。特殊数据可以集中进行操作，而不像之前那样分散。不用再猜测这些陌生的常量的意义以及它们为什么在数组中。
 - 更容易发现重复代码。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/primitive-obsession-03.png"/></div>
+{% asset_img primitive-obsession-03.png primitive-obsession-03 %}
 
 ## 重构方法说明
 
@@ -379,13 +377,13 @@ else {
 
 类之中有一个数值类型码，但它并不影响类的行为。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-class-before.png"/></div>
+{% asset_img replace-type-code-with-class-before.png replace-type-code-with-class-before %}
 
 **解决**
 
 以一个新的类替换该数值类型码。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-class-after.png"/></div>
+{% asset_img replace-type-code-with-class-after.png replace-type-code-with-class-after %}
 
 ### 引入参数对象(Introduce Parameter Object)
 
@@ -393,13 +391,13 @@ else {
 
 某些参数总是很自然地同时出现。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-before.png"/></div>
+{% asset_img introduce-parameter-object-before.png introduce-parameter-object-before %}
 
 **解决**
 
 以一个对象来取代这些参数。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-after.png"/></div>
+{% asset_img introduce-parameter-object-after.png introduce-parameter-object-after %}
 
 ### 保持对象完整(Preserve Whole Object)
 
@@ -427,13 +425,13 @@ boolean withinPlan = plan.withinRange(daysTempRange);
 
 你有一个不可变的类型码，它会影响类的行为。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-subclasses-before.png"/></div>
+{% asset_img replace-type-code-with-subclasses-before.png replace-type-code-with-subclasses-before %}
 
 **解决**
 
 以子类取代这个类型码。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-subclasses-after.png"/></div>
+{% asset_img replace-type-code-with-subclasses-after.png replace-type-code-with-subclasses-after %}
 
 ### 以状态/策略模式取代类型码(Replace Type Code with State/Strategy)
 
@@ -441,13 +439,13 @@ boolean withinPlan = plan.withinRange(daysTempRange);
 
 你有一个类型码，它会影响类的行为，但你无法通过继承消除它。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-state-strategy-before.png"/></div>
+{% asset_img replace-type-code-with-state-strategy-before.png replace-type-code-with-state-strategy-before %}
 
 **解决**
 
 以状态对象取代类型码。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/replace-type-code-with-state-strategy-after.png"/></div>
+{% asset_img replace-type-code-with-state-strategy-after.png replace-type-code-with-state-strategy-after %}
 
 ### 以对象取代数组(Replace Array with Object)
 
@@ -475,7 +473,7 @@ row.setWins("15");
 
 > 一个函数有超过 3、4 个入参。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/long-parameter-list-01.png"/></div>
+{% asset_img long-parameter-list-01.png long-parameter-list-01 %}
 
 ### 问题原因
 
@@ -487,7 +485,7 @@ row.setWins("15");
 
 ### 解决方案
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/long-parameter-list-02.png"/></div>
+{% asset_img long-parameter-list-02.png long-parameter-list-02 %}
 
 - 如果向已有的对象发出一条请求就可以取代一个参数，那么你应该使用 `以函数取代参数(Replace Parameter with Methods)` 。在这里，，“已有的对象”可能是函数所属类里的一个字段，也可能是另一个参数。
 - 你还可以运用 `保持对象完整(Preserve Whole Object)` 将来自同一对象的一堆数据收集起来，并以该对象替换它们。
@@ -552,13 +550,13 @@ boolean withinPlan = plan.withinRange(daysTempRange);
 
 某些参数总是很自然地同时出现。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-before.png"/></div>
+{% asset_img introduce-parameter-object-before.png introduce-parameter-object-before %}
 
 **解决**
 
 以一个对象来取代这些参数。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-after.png"/></div>
+{% asset_img introduce-parameter-object-after.png introduce-parameter-object-after %}
 
 代码中有很多基本数据类型的数据。
 
@@ -568,7 +566,7 @@ Tips:**如果看到一些基本类型数据，尝试定义一种新的数据类�
 
 > 有时，代码的不同部分包含相同的变量组（例如用于连接到数据库的参数）。这些绑在一起出现的数据应该拥有自己的对象。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/data-clumps-01.png"/></div>
+{% asset_img data-clumps-01.png data-clumps-01 %}
 
 ### 问题原因
 
@@ -583,14 +581,14 @@ Tips:**如果看到一些基本类型数据，尝试定义一种新的数据类�
 - 如果数据泥团的部分数据出现在其他函数中，考虑运用 `保持对象完整(Preserve Whole Object)` 将整个数据对象传入到函数中。
 - 检视一下使用这些字段的代码，也许，将它们移入一个数据类是个不错的主意。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/data-clumps-02.png"/></div>
+{% asset_img data-clumps-02.png data-clumps-02 %}
 
 ### 收益
 
 - 提高代码易读性和组织性。对于特殊数据的操作，可以集中进行处理，而不像以前那样分散。
 - 减少代码量。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/data-clumps-03.png"/></div>
+{% asset_img data-clumps-03.png data-clumps-03 %}
 
 ### 何时忽略
 
@@ -604,13 +602,13 @@ Tips:**如果看到一些基本类型数据，尝试定义一种新的数据类�
 
 某个类做了不止一件事。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-class-before.png"/></div>
+{% asset_img extract-class-before.png extract-class-before %}
 
 **解决**
 
 建立一个新类，将相关的字段和函数从旧类搬移到新类。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/extract-class-after.png"/></div>
+{% asset_img extract-class-after.png extract-class-after %}
 
 #### 引入参数对象(Introduce Parameter Object)
 
@@ -618,13 +616,13 @@ Tips:**如果看到一些基本类型数据，尝试定义一种新的数据类�
 
 某些参数总是很自然地同时出现。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-before.png"/></div>
+{% asset_img introduce-parameter-object-before.png introduce-parameter-object-before %}
 
 **解决**
 
 以一个对象来取代这些参数。
 
-<div align="center"><img src="https://github.com/komamj/komamj.github.io/blob/master/_assets/introduce-parameter-object-after.png"/></div>
+{% asset_img introduce-parameter-object-after.png introduce-parameter-object-after %}
 
 #### 保持对象完整(Preserve Whole Object)
 

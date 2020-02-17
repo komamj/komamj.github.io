@@ -7,3 +7,5 @@ yarn.lock
 package-lock.json
 /public
 .nyc_output/
+/.deploy_git/
+/db.json
