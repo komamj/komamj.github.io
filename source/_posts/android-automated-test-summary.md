@@ -1,7 +1,7 @@
 ---
 title: Android自动化测试总结
 date: 2020-02-16 21:28:12
-tags: 
+tags: test
 ---
 
 # Android自动化测试总结
