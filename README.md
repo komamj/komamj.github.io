@@ -1,1 +1,0 @@
-# komamj.github.io
