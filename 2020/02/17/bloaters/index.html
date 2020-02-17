@@ -7,12 +7,12 @@
   
   <title>代码坏味道之膨胀剂 | komamj&#39;s 札记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。     过长方法 过大的类 基本类型偏执 过长参数列 数据泥团  过长方法 一个函数含有太多行代码。一般来说，任何函数超过 10 行时，你就可以考虑是不是过长了。函数中的代码行数原则上不要超过 100 行。    问题的原因通">
+  <meta name="description" content="膨胀剂 代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。     过长方法 过大的类 基本类型偏执 过长参数列 数据泥团  过长方法  一个函数含有太多行代码。一般来说，任何函数超过 10 行时，你就可以考虑是不是过长了。  函数中的代码行数原则上不要超过 100 行。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="代码坏味道之膨胀剂">
 <meta property="og:url" content="http://yoursite.com/2020/02/17/bloaters/index.html">
 <meta property="og:site_name" content="komamj&#39;s 札记">
-<meta property="og:description" content="代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。     过长方法 过大的类 基本类型偏执 过长参数列 数据泥团  过长方法 一个函数含有太多行代码。一般来说，任何函数超过 10 行时，你就可以考虑是不是过长了。函数中的代码行数原则上不要超过 100 行。    问题的原因通">
+<meta property="og:description" content="膨胀剂 代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。     过长方法 过大的类 基本类型偏执 过长参数列 数据泥团  过长方法  一个函数含有太多行代码。一般来说，任何函数超过 10 行时，你就可以考虑是不是过长了。  函数中的代码行数原则上不要超过 100 行。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2020/02/17/bloaters/bloaters.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/17/bloaters/long-method-01.png">
@@ -49,7 +49,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/02/17/bloaters/introduce-parameter-object-before.png">
 <meta property="og:image" content="http://yoursite.com/2020/02/17/bloaters/introduce-parameter-object-after.png">
 <meta property="article:published_time" content="2020-02-17T02:35:22.000Z">
-<meta property="article:modified_time" content="2020-02-17T04:13:25.236Z">
+<meta property="article:modified_time" content="2020-02-17T04:33:35.949Z">
 <meta property="article:author" content="komamj">
 <meta property="article:tag" content="refactor">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
+        <h1 id="膨胀剂"><a href="#膨胀剂" class="headerlink" title="膨胀剂"></a>膨胀剂</h1><blockquote>
 <p>代码中的类、函数、字段没有经过合理的组织，只是简单的堆砌起来。这一类型的问题通常在代码的初期并不明显，但是随着代码规模的增长而逐渐积累（特别是当没有人努力去根除它们时）。</p>
 </blockquote>
 <img src="/2020/02/17/bloaters/bloaters.png" class="" title="bloaters">
@@ -141,7 +141,10 @@
 <li><a href="#数据泥团">数据泥团</a></li>
 </ul>
 <h2 id="过长方法"><a href="#过长方法" class="headerlink" title="过长方法"></a>过长方法</h2><blockquote>
-<p>一个函数含有太多行代码。一般来说，任何函数超过 <strong>10</strong> 行时，你就可以考虑是不是过长了。<br>函数中的代码行数原则上不要超过 <strong>100</strong> 行。</p>
+<ul>
+<li>一个函数含有太多行代码。一般来说，任何函数超过 <strong>10</strong> 行时，你就可以考虑是不是过长了。 </li>
+<li>函数中的代码行数原则上不要超过 <strong>100</strong> 行。</li>
+</ul>
 </blockquote>
 <img src="/2020/02/17/bloaters/long-method-01.png" class="" title="long-method-01">
 
@@ -283,7 +286,7 @@
 <h2 id="基本类型偏执"><a href="#基本类型偏执" class="headerlink" title="基本类型偏执"></a>基本类型偏执</h2><blockquote>
 <ul>
 <li>使用基本类型而不是小对象来实现简单任务（例如货币、范围、电话号码字符串等）。</li>
-<li>使用常量编码信息（例如一个用于引用管理员权限的常量USER_ADMIN_ROLE = 1 ）。</li>
+<li>使用常量编码信息（例如一个用于引用管理员权限的常量 USER_ADMIN_ROLE = 1 ）。</li>
 <li>使用字符串常量作为字段名在数组中使用。</li>
 </ul>
 </blockquote>
@@ -456,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/bloaters/" data-id="ck6py5vwy0001ce2vbwoq88q5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/bloaters/" data-id="ck6pys5dz0000vl2vamo849h7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/refactor/" rel="tag">refactor</a></li></ul>
