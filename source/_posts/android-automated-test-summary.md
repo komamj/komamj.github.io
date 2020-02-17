@@ -1,10 +1,10 @@
 ---
-title: android automated test summary
+title: Android自动化测试总结
 date: 2020-02-16 21:28:12
-tags: test
+tags: 
 ---
 
-# Android自动化测试
+# Android自动化测试总结
 
 ## 测试金字塔
 
