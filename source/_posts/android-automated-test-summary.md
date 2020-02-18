@@ -3,9 +3,6 @@ title: Android自动化测试总结
 date: 2020-02-16 21:28:12
 tags: test
 ---
-
-# Android自动化测试总结
-
 ## 测试金字塔
 
 {% asset_img of-tests.png 测试金字塔，显示了应用的测试套件应包含的三类测试 %}
