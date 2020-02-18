@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>代码坏味道系列之滥用OO | komamj&#39;s 札记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="滥用OO滥用面向对象，代码部分或完全地违背了面向对象编程原则。    switch惊悚现身 临时字段 被拒绝的遗赠 异曲同工的类  switch惊悚现身代码中有一个复杂的 switch 语句或 if 序列语句。   问题原因面向对象程序的一个最明显特征就是：少用 switch 和 case 语句。从本质上说，switch 语句的问题在于重复（if 序列也同样如此）。你常会发现 switch 语句散">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码坏味道系列之滥用OO">
+<meta property="og:url" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/index.html">
+<meta property="og:site_name" content="komamj&#39;s 札记">
+<meta property="og:description" content="滥用OO滥用面向对象，代码部分或完全地违背了面向对象编程原则。    switch惊悚现身 临时字段 被拒绝的遗赠 异曲同工的类  switch惊悚现身代码中有一个复杂的 switch 语句或 if 序列语句。   问题原因面向对象程序的一个最明显特征就是：少用 switch 和 case 语句。从本质上说，switch 语句的问题在于重复（if 序列也同样如此）。你常会发现 switch 语句散">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/oo-abusers.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/switch-statements-01.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/switch-statements-02.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/move-method-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/move-method-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-type-code-with-subclasses-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-type-code-with-subclasses-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-type-code-with-state-strategy-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-type-code-with-state-strategy-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/temporary-field-01.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/temporary-field-02.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/temporary-field-03.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-class-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-class-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/refused-bequest-01.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/refused-bequest-02.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/refused-bequest-03.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-inheritance-with-delegation-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/replace-inheritance-with-delegation-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-superclass-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-superclass-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/alternative-classes-with-different-interfaces-01.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/alternative-classes-with-different-interfaces-02.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/move-method-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/move-method-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/parameterize-method-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/parameterize-method-after.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-superclass-before.png">
+<meta property="og:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/extract-superclass-after.png">
+<meta property="article:published_time" content="2020-02-18T02:32:58.000Z">
+<meta property="article:modified_time" content="2020-02-18T03:07:37.585Z">
+<meta property="article:author" content="komamj">
+<meta property="article:tag" content="refactor">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://komamj.github.io/2020/02/18/object-orientation-abusers/oo-abusers.png">
+  
+    <link rel="alternate" href="/atom.xml" title="komamj&#39;s 札记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">komamj&#39;s 札记</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">komamj在mobile开发中的一些总结与记录</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://komamj.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-object-orientation-abusers" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/18/object-orientation-abusers/" class="article-date">
+  <time datetime="2020-02-18T02:32:58.000Z" itemprop="datePublished">2020-02-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      代码坏味道系列之滥用OO
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="滥用OO"><a href="#滥用OO" class="headerlink" title="滥用OO"></a>滥用OO</h1><p>滥用面向对象，代码部分或完全地违背了面向对象编程原则。</p>
+<img src="/2020/02/18/object-orientation-abusers/oo-abusers.png" class="" title="oo-abusers">
+
+<ul>
+<li><a href="#switch惊悚现身">switch惊悚现身</a></li>
+<li><a href="#临时字段">临时字段</a></li>
+<li><a href="#被拒绝的遗赠">被拒绝的遗赠</a></li>
+<li><a href="#异曲同工的类">异曲同工的类</a></li>
+</ul>
+<h2 id="switch惊悚现身"><a href="#switch惊悚现身" class="headerlink" title="switch惊悚现身"></a>switch惊悚现身</h2><p>代码中有一个复杂的 <code>switch</code> 语句或 <code>if</code> 序列语句。</p>
+<img src="/2020/02/18/object-orientation-abusers/switch-statements-01.png" class="" title="switch-statements-01">
+
+<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>面向对象程序的一个最明显特征就是：少用 <code>switch</code> 和 <code>case</code> 语句。从本质上说，<code>switch</code> 语句的问题在于重复（<code>if</code> 序列也同样如此）。你常会发现 <code>switch</code> 语句散布于不同地点。如果要为它添加一个新的 <code>case</code> 子句，就必须找到所有 <code>switch</code> 语句并修改它们。面向对象中的多态概念可为此带来优雅的解决办法。</p>
+<p>大多数时候，一看到 <code>switch</code> 语句，就应该考虑以多态来替换它。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>问题是多态该出现在哪？switch 语句常常根据类型码进行选择，你要的是“与该类型码相关的函数或类”，所以应该运用 <code>提炼函数(Extract Method)</code> 将 <code>switch</code> 语句提炼到一个独立函数中，再以 <code>搬移函数(Move Method)</code> 将它搬移到需要多态性的那个类里。</li>
+<li>如果你的 <code>switch</code> 是基于类型码来识别分支，这时可以运用 <code>以子类取代类型码(Replace Type Code with Subclass)</code> 或 <code>以状态/策略模式取代类型码(Replace Type Code with State/Strategy)</code> 。</li>
+<li>一旦完成这样的继承结构后，就可以运用 <code>以多态取代条件表达式(Replace Conditional with Polymorphism)</code> 了。</li>
+<li>如果条件分支并不多并且它们使用不同参数调用相同的函数，多态就没必要了。在这种情况下，你可以运用 <code>以明确函数取代参数(Replace Parameter with Explicit Methods)</code> 。</li>
+<li>如果你的选择条件之一是 null，可以运用 <code>引入 Null 对象(Introduce Null Object)</code> 。</li>
+</ul>
+<h3 id="收益"><a href="#收益" class="headerlink" title="收益"></a>收益</h3><ul>
+<li>提升代码组织性。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/switch-statements-02.png" class="" title="switch-statements-02">
+
+<h3 id="何时忽略"><a href="#何时忽略" class="headerlink" title="何时忽略"></a>何时忽略</h3><ul>
+<li>如果一个 <code>switch</code> 操作只是执行简单的行为，就没有重构的必要了。</li>
+<li><code>switch</code> 常被工厂设计模式族（<code>工厂方法模式(Factory Method)</code>和<code>抽象工厂模式(Abstract Factory)</code>）所使用，这种情况下也没必要重构。</li>
+</ul>
+<h3 id="重构方法说明"><a href="#重构方法说明" class="headerlink" title="重构方法说明"></a>重构方法说明</h3><h4 id="提炼函数-Extract-Method"><a href="#提炼函数-Extract-Method" class="headerlink" title="提炼函数(Extract Method)"></a>提炼函数(Extract Method)</h4><p><strong>问题</strong></p>
+<p>你有一段代码可以组织在一起。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void printOwing() &#123;</span><br><span class="line">  printBanner();</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;print details</span><br><span class="line">  System.out.println(&quot;name: &quot; + name);</span><br><span class="line">  System.out.println(&quot;amount: &quot; + getOutstanding());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>移动这段代码到一个新的函数中，使用函数的调用来替代老代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">void printOwing() &#123;</span><br><span class="line">  printBanner();</span><br><span class="line">  printDetails(getOutstanding());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void printDetails(double outstanding) &#123;</span><br><span class="line">  System.out.println(&quot;name: &quot; + name);</span><br><span class="line">  System.out.println(&quot;amount: &quot; + outstanding);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="搬移函数-Move-Method"><a href="#搬移函数-Move-Method" class="headerlink" title="搬移函数(Move Method)"></a>搬移函数(Move Method)</h4><p><strong>问题</strong></p>
+<p>你的程序中，有个函数与其所驻类之外的另一个类进行更多交流：调用后者，或被后者调用。</p>
+<img src="/2020/02/18/object-orientation-abusers/move-method-before.png" class="" title="move-method-before">
+
+<p><strong>解决</strong></p>
+<p>在该函数最常引用的类中建立一个有着类似行为的新函数。将旧函数变成一个单纯的委托函数，或是旧函数完全移除。</p>
+<img src="/2020/02/18/object-orientation-abusers/move-method-after.png" class="" title="move-method-after">
+
+<h4 id="以子类取代类型码-Replace-Type-Code-with-Subclass"><a href="#以子类取代类型码-Replace-Type-Code-with-Subclass" class="headerlink" title="以子类取代类型码(Replace Type Code with Subclass)"></a>以子类取代类型码(Replace Type Code with Subclass)</h4><p><strong>问题</strong></p>
+<p>你有一个不可变的类型码，它会影响类的行为。</p>
+<img src="/2020/02/18/object-orientation-abusers/replace-type-code-with-subclasses-before.png" class="" title="replace-type-code-with-subclasses-before">
+
+<p><strong>解决</strong></p>
+<p>以子类取代这个类型码。</p>
+<img src="/2020/02/18/object-orientation-abusers/replace-type-code-with-subclasses-after.png" class="" title="replace-type-code-with-subclasses-after">
+
+<h4 id="以状态-策略模式取代类型码-Replace-Type-Code-with-State-Strategy"><a href="#以状态-策略模式取代类型码-Replace-Type-Code-with-State-Strategy" class="headerlink" title="以状态/策略模式取代类型码(Replace Type Code with State/Strategy)"></a>以状态/策略模式取代类型码(Replace Type Code with State/Strategy)</h4><p><strong>问题</strong></p>
+<p>你有一个类型码，它会影响类的行为，但你无法通过继承消除它。</p>
+<img src="/2020/02/18/object-orientation-abusers/replace-type-code-with-state-strategy-before.png" class="" title="replace-type-code-with-state-strategy-before">
+
+<p><strong>解决</strong></p>
+<p>以状态对象取代类型码。</p>
+<img src="/2020/02/18/object-orientation-abusers/replace-type-code-with-state-strategy-after.png" class="" title="replace-type-code-with-state-strategy-after">
+
+<h4 id="以多态取代条件表达式-Replace-Conditional-with-Polymorphism"><a href="#以多态取代条件表达式-Replace-Conditional-with-Polymorphism" class="headerlink" title="以多态取代条件表达式(Replace Conditional with Polymorphism)"></a>以多态取代条件表达式(Replace Conditional with Polymorphism)</h4><p><strong>问题</strong></p>
+<p>你手上有个条件表达式，它根据对象类型的不同而选择不同的行为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Bird &#123;</span><br><span class="line">  &#x2F;&#x2F;...</span><br><span class="line">  double getSpeed() &#123;</span><br><span class="line">    switch (type) &#123;</span><br><span class="line">      case EUROPEAN:</span><br><span class="line">        return getBaseSpeed();</span><br><span class="line">      case AFRICAN:</span><br><span class="line">        return getBaseSpeed() - getLoadFactor() * numberOfCoconuts;</span><br><span class="line">      case NORWEGIAN_BLUE:</span><br><span class="line">        return (isNailed) ? 0 : getBaseSpeed(voltage);</span><br><span class="line">    &#125;</span><br><span class="line">    throw new RuntimeException(&quot;Should be unreachable&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>将这个条件表达式的每个分支放进一个子类内的覆写函数中，然后将原始函数声明为抽象函数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="function"><span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">getSpeed</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">European</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">double</span> <span class="title">getSpeed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getBaseSpeed();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">African</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">double</span> <span class="title">getSpeed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getBaseSpeed() - getLoadFactor() * numberOfCoconuts;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NorwegianBlue</span> <span class="keyword">extends</span> <span class="title">Bird</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">double</span> <span class="title">getSpeed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (isNailed) ? <span class="number">0</span> : getBaseSpeed(voltage);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Somewhere in client code</span></span><br><span class="line">speed = bird.getSpeed();</span><br></pre></td></tr></table></figure>
+
+<h4 id="以明确函数取代参数-Replace-Parameter-with-Explicit-Methods"><a href="#以明确函数取代参数-Replace-Parameter-with-Explicit-Methods" class="headerlink" title="以明确函数取代参数(Replace Parameter with Explicit Methods)"></a>以明确函数取代参数(Replace Parameter with Explicit Methods)</h4><p><strong>问题</strong></p>
+<p>你有一个函数，其中完全取决于参数值而采取不同的行为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void setValue(String name, int value) &#123;</span><br><span class="line">  if (name.equals(&quot;height&quot;)) &#123;</span><br><span class="line">    height &#x3D; value;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  if (name.equals(&quot;width&quot;)) &#123;</span><br><span class="line">    width &#x3D; value;</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  Assert.shouldNeverReachHere();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>针对该参数的每一个可能值，建立一个独立函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void setHeight(int arg) &#123;</span><br><span class="line">  height &#x3D; arg;</span><br><span class="line">&#125;</span><br><span class="line">void setWidth(int arg) &#123;</span><br><span class="line">  width &#x3D; arg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="引入-Null-对象-Introduce-Null-Object"><a href="#引入-Null-对象-Introduce-Null-Object" class="headerlink" title="引入 Null 对象(Introduce Null Object)"></a>引入 Null 对象(Introduce Null Object)</h4><p><strong>问题</strong></p>
+<p>你需要再三检查某对象是否为 null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (customer &#x3D;&#x3D; null) &#123;</span><br><span class="line">  plan &#x3D; BillingPlan.basic();</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  plan &#x3D; customer.getPlan();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>将 null 值替换为 null 对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class NullCustomer extends Customer &#123;</span><br><span class="line">  Plan getPlan() &#123;</span><br><span class="line">    return new NullPlan();</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; Some other NULL functionality.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Replace null values with Null-object.</span><br><span class="line">customer &#x3D; (order.customer !&#x3D; null) ? order.customer : new NullCustomer();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Use Null-object as if it&#39;s normal subclass.</span><br><span class="line">plan &#x3D; customer.getPlan();</span><br></pre></td></tr></table></figure>
+
+<h2 id="临时字段"><a href="#临时字段" class="headerlink" title="临时字段"></a>临时字段</h2><p>临时字段(Temporary Field)的值只在特定环境下有意义，离开这个环境，它们就什么也不是了。</p>
+<img src="/2020/02/18/object-orientation-abusers/temporary-field-01.png" class="" title="temporary-field-01">
+
+<h3 id="问题原因-1"><a href="#问题原因-1" class="headerlink" title="问题原因"></a>问题原因</h3><p>有时你会看到这样的对象：其内某个实例变量仅为某种特定情况而设。这样的代码让人不易理解，因为你通常认为对象在所有时候都需要它的所有变量。在变量未被使用的情况下猜测当初设置目的，会让你发疯。<br>通常，临时字段是在某一算法需要大量输入时而创建。因此，为了避免函数有过多参数，程序员决定在类中创建这些数据的临时字段。这些临时字段仅仅在算法中使用，其他时候却毫无用处。<br>这种代码不好理解。你期望查看对象字段的数据，但是出于某种原因，它们总是为空。</p>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>可以通过 <code>提炼类(Extract Class)</code> 将临时字段和操作它们的所有代码提炼到一个单独的类中。此外，你可以运用 <code>以函数对象取代函数(Replace Method with Method Object)</code> 来实现同样的目的。</li>
+<li><code>引入 Null 对象(Introduce Null Object)</code> 在“变量不合法”的情况下创建一个 null 对象，从而避免写出条件表达式。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/temporary-field-02.png" class="" title="temporary-field-02">
+
+<h3 id="收益-1"><a href="#收益-1" class="headerlink" title="收益"></a>收益</h3><ul>
+<li>更好的代码清晰度和组织性。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/temporary-field-03.png" class="" title="temporary-field-03">
+
+<h3 id="重构方法说明-1"><a href="#重构方法说明-1" class="headerlink" title="重构方法说明"></a>重构方法说明</h3><h4 id="提炼类-Extract-Class"><a href="#提炼类-Extract-Class" class="headerlink" title="提炼类(Extract Class)"></a>提炼类(Extract Class)</h4><p><strong>问题</strong></p>
+<p>某个类做了不止一件事。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-class-before.png" class="" title="extract-class-before">
+
+<p><strong>解决</strong></p>
+<p>建立一个新类，将相关的字段和函数从旧类搬移到新类。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-class-after.png" class="" title="extract-class-after">
+
+<h4 id="以函数对象取代函数-Replace-Method-with-Method-Object"><a href="#以函数对象取代函数-Replace-Method-with-Method-Object" class="headerlink" title="以函数对象取代函数(Replace Method with Method Object)"></a>以函数对象取代函数(Replace Method with Method Object)</h4><p><strong>问题</strong></p>
+<p>你有一个过长函数，它的局部变量交织在一起，以致于你无法应用提炼函数(Extract Method) 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Order &#123;</span><br><span class="line">  &#x2F;&#x2F;...</span><br><span class="line">  public double price() &#123;</span><br><span class="line">    double primaryBasePrice;</span><br><span class="line">    double secondaryBasePrice;</span><br><span class="line">    double tertiaryBasePrice;</span><br><span class="line">    &#x2F;&#x2F; long computation.</span><br><span class="line">    &#x2F;&#x2F;...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>将函数移到一个独立的类中，使得局部变量成了这个类的字段。然后，你可以将函数分割成这个类中的多个函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Order &#123;</span><br><span class="line">  &#x2F;&#x2F;...</span><br><span class="line">  public double price() &#123;</span><br><span class="line">    return new PriceCalculator(this).compute();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class PriceCalculator &#123;</span><br><span class="line">  private double primaryBasePrice;</span><br><span class="line">  private double secondaryBasePrice;</span><br><span class="line">  private double tertiaryBasePrice;</span><br><span class="line"></span><br><span class="line">  public PriceCalculator(Order order) &#123;</span><br><span class="line">    &#x2F;&#x2F; copy relevant information from order object.</span><br><span class="line">    &#x2F;&#x2F;...</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public double compute() &#123;</span><br><span class="line">    &#x2F;&#x2F; long computation.</span><br><span class="line">    &#x2F;&#x2F;...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="引入-Null-对象-Introduce-Null-Object-1"><a href="#引入-Null-对象-Introduce-Null-Object-1" class="headerlink" title="引入 Null 对象(Introduce Null Object)"></a>引入 Null 对象(Introduce Null Object)</h4><p><strong>问题</strong></p>
+<p>你需要再三检查某对象是否为 null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if (customer &#x3D;&#x3D; null) &#123;</span><br><span class="line">  plan &#x3D; BillingPlan.basic();</span><br><span class="line">&#125;</span><br><span class="line">else &#123;</span><br><span class="line">  plan &#x3D; customer.getPlan();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>将 null 值替换为 null 对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class NullCustomer extends Customer &#123;</span><br><span class="line">  Plan getPlan() &#123;</span><br><span class="line">    return new NullPlan();</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; Some other NULL functionality.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Replace null values with Null-object.</span><br><span class="line">customer &#x3D; (order.customer !&#x3D; null) ? order.customer : new NullCustomer();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Use Null-object as if it&#39;s normal subclass.</span><br><span class="line">plan &#x3D; customer.getPlan();</span><br></pre></td></tr></table></figure>
+
+<h2 id="被拒绝的遗赠"><a href="#被拒绝的遗赠" class="headerlink" title="被拒绝的遗赠"></a>被拒绝的遗赠</h2><p>子类仅仅使用父类中的部分方法和属性。其他来自父类的馈赠成为了累赘。</p>
+<img src="/2020/02/18/object-orientation-abusers/refused-bequest-01.png" class="" title="refused-bequest-01">
+
+<h3 id="问题原因-2"><a href="#问题原因-2" class="headerlink" title="问题原因"></a>问题原因</h3><p>有些人仅仅是想重用超类中的部分代码而创建了子类。但实际上超类和子类完全不同。</p>
+<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>如果继承没有意义并且子类和父类之间确实没有共同点，可以运用 <code>以委托取代继承(Replace Inheritance with Delegation)</code> 消除继承。</li>
+<li>如果继承是适当的，则去除子类中不需要的字段和方法。运用 <code>提炼超类(Extract Superclass)</code> 将所有超类中对于子类有用的字段和函数提取出来，置入一个新的超类中，然后让两个类都继承自它。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/refused-bequest-02.png" class="" title="refused-bequest-02">
+
+<h3 id="收益-2"><a href="#收益-2" class="headerlink" title="收益"></a>收益</h3><ul>
+<li>提高代码的清晰度和组织性。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/refused-bequest-03.png" class="" title="refused-bequest-03">
+
+<h3 id="重构方法说明-2"><a href="#重构方法说明-2" class="headerlink" title="重构方法说明"></a>重构方法说明</h3><h4 id="以委托取代继承-Replace-Inheritance-with-Delegation"><a href="#以委托取代继承-Replace-Inheritance-with-Delegation" class="headerlink" title="以委托取代继承(Replace Inheritance with Delegation)"></a>以委托取代继承(Replace Inheritance with Delegation)</h4><p><strong>问题</strong></p>
+<p>某个子类只使用超类接口中的一部分，或是根本不需要继承而来的数据。</p>
+<img src="/2020/02/18/object-orientation-abusers/replace-inheritance-with-delegation-before.png" class="" title="replace-inheritance-with-delegation-before">
+
+<p><strong>解决</strong></p>
+<ol>
+<li>在子类中新建一个字段用以保存超类；</li>
+<li>调整子类函数，令它改而委托超类；</li>
+<li>然后去掉两者之间的继承关系。</li>
+</ol>
+<img src="/2020/02/18/object-orientation-abusers/replace-inheritance-with-delegation-after.png" class="" title="replace-inheritance-with-delegation-after">
+
+<h4 id="提炼超类-Extract-Superclass"><a href="#提炼超类-Extract-Superclass" class="headerlink" title="提炼超类(Extract Superclass)"></a>提炼超类(Extract Superclass)</h4><p><strong>问题</strong></p>
+<p>两个类有相似特性。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-superclass-before.png" class="" title="extract-superclass-before">
+
+<p><strong>解决</strong></p>
+<p>为这两个类建立一个超类，将相同特性移至超类。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-superclass-after.png" class="" title="extract-superclass-after">
+
+<h2 id="异曲同工的类"><a href="#异曲同工的类" class="headerlink" title="异曲同工的类"></a>异曲同工的类</h2><p>两个类中有着不同的函数，却在做着同一件事。</p>
+<img src="/2020/02/18/object-orientation-abusers/alternative-classes-with-different-interfaces-01.png" class="" title="alternative-classes-with-different-interfaces-01">
+
+<h3 id="问题原因-3"><a href="#问题原因-3" class="headerlink" title="问题原因"></a>问题原因</h3><p>这种情况往往是因为：创建这个类的程序员并不知道已经有实现这个功能的类存在了。</p>
+<h3 id="解决方案-3"><a href="#解决方案-3" class="headerlink" title="解决方案"></a>解决方案</h3><ul>
+<li>如果两个函数做同一件事，却有着不同的签名，请运用 <code>函数改名(Rename Method)</code> 根据它们的用途重新命名。</li>
+<li>运用 <code>搬移函数(Move Method)</code> 、 <code>添加参数(Add Parameter)</code> 和 <code>令函数携带参数(Parameterize Method)</code> 来使得方法的名称和实现一致。</li>
+<li>如果两个类仅有部分功能是重复的，尝试运用 <code>提炼超类(Extract Superclass)</code> 。这种情况下，已存在的类就成了超类。</li>
+<li>当最终选择并运用某种方法来重构后，也许你就能删除其中一个类了。</li>
+</ul>
+<h3 id="收益-3"><a href="#收益-3" class="headerlink" title="收益"></a>收益</h3><ul>
+<li>消除了不必要的重复代码，为代码瘦身了。</li>
+<li>代码更易读（不再需要猜测为什么要有两个功能相同的类）。</li>
+</ul>
+<img src="/2020/02/18/object-orientation-abusers/alternative-classes-with-different-interfaces-02.png" class="" title="alternative-classes-with-different-interfaces-02">
+
+<h3 id="何时忽略-1"><a href="#何时忽略-1" class="headerlink" title="何时忽略"></a>何时忽略</h3><ul>
+<li>有时合并类是不可能的，或者是如此困难以至于没有意义。例如：两个功能相似的类存在于不同的 lib 库中。</li>
+</ul>
+<h3 id="重构方法说明-3"><a href="#重构方法说明-3" class="headerlink" title="重构方法说明"></a>重构方法说明</h3><h4 id="函数改名-Rename-Method"><a href="#函数改名-Rename-Method" class="headerlink" title="函数改名(Rename Method)"></a>函数改名(Rename Method)</h4><p><strong>问题</strong></p>
+<p>函数的名称未能恰当的揭示函数的用途。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  public String getsnm();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong></p>
+<p>修改函数名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  public String getSecondName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="搬移函数-Move-Method-1"><a href="#搬移函数-Move-Method-1" class="headerlink" title="搬移函数(Move Method)"></a>搬移函数(Move Method)</h5><p><strong>问题</strong></p>
+<p>你的程序中，有个函数与其所驻类之外的另一个类进行更多交流：调用后者，或被后者调用。</p>
+<img src="/2020/02/18/object-orientation-abusers/move-method-before.png" class="" title="move-method-before">
+
+<p><strong>解决</strong></p>
+<p>在该函数最常引用的类中建立一个有着类似行为的新函数。将旧函数变成一个单纯的委托函数，或是旧函数完全移除。</p>
+<img src="/2020/02/18/object-orientation-abusers/move-method-after.png" class="" title="move-method-after">
+
+<h4 id="添加参数-Add-Parameter"><a href="#添加参数-Add-Parameter" class="headerlink" title="添加参数(Add Parameter)"></a>添加参数(Add Parameter)</h4><p><strong>问题</strong><br>某个函数需要从调用端得到更多信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Customer &#123;</span><br><span class="line">  public Contact getContact();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决</strong><br>为此函数添加一个对象函数，让改对象带进函数所需信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Customer &#123;</span><br><span class="line">  public Contact getContact(Date date);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="令函数携带参数-Parameterize-Method"><a href="#令函数携带参数-Parameterize-Method" class="headerlink" title="令函数携带参数(Parameterize Method)"></a>令函数携带参数(Parameterize Method)</h4><p><strong>问题</strong></p>
+<p>若干函数做了类似的工作，但在函数本体中却包含了不同的值。</p>
+<img src="/2020/02/18/object-orientation-abusers/parameterize-method-before.png" class="" title="parameterize-method-before">
+
+<p><strong>解决</strong></p>
+<p>建立单一函数，以参数表达哪些不同的值。</p>
+<img src="/2020/02/18/object-orientation-abusers/parameterize-method-after.png" class="" title="parameterize-method-after">
+
+<h4 id="提炼超类-Extract-Superclass-1"><a href="#提炼超类-Extract-Superclass-1" class="headerlink" title="提炼超类(Extract Superclass)"></a>提炼超类(Extract Superclass)</h4><p><strong>问题</strong></p>
+<p>两个类有相似特性。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-superclass-before.png" class="" title="extract-superclass-before">
+
+<p><strong>解决</strong></p>
+<p>为这两个类建立一个超类，将相同特性移至超类。</p>
+<img src="/2020/02/18/object-orientation-abusers/extract-superclass-after.png" class="" title="extract-superclass-after">
+
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ul>
+<li><a href="https://komamj.github.io/2020/02/17/bloaters/">代码坏味道系列之膨胀剂</a></li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>《重构——改善既有代码的设计》 - by Martin Fowler</li>
+<li><a href="https://sourcemaking.com/refactoring" target="_blank" rel="noopener">https://sourcemaking.com/refactoring</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://komamj.github.io/2020/02/18/object-orientation-abusers/" data-id="ck6rbczdp0000cp2vghnrda5c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/refactor/" rel="tag">refactor</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/17/bloaters/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">代码坏味道之膨胀剂</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/refactor/" rel="tag">refactor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/refactor/" style="font-size: 20px;">refactor</a> <a href="/tags/test/" style="font-size: 10px;">test</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/18/object-orientation-abusers/">代码坏味道系列之滥用OO</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/17/bloaters/">代码坏味道之膨胀剂</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/16/android-automated-test-summary/">Android自动化测试总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 komamj<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
