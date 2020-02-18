@@ -645,3 +645,12 @@ boolean withinPlan = plan.withinRange(low, high);
 ```
 boolean withinPlan = plan.withinRange(daysTempRange);
 ```
+
+## 扩展阅读
+
+- [代码坏味道系列之滥用OO](https://komamj.github.io/2020/02/17/object-orientation-abusers/)
+
+## 参考资料
+
+- 《重构——改善既有代码的设计》 - by Martin Fowler
+- https://refactoring.guru/refactoring
